@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-esm src/server.ts",
-    "build": "ts-node-esm src/server.ts",
     "nodemon": "nodemon src/server.ts",
     "setup": "ts-node src/setup.ts --unhandled-rejections=strict",
     "ts-check": "tsc --noEmit --lib ES2015 ./src/*.ts",
