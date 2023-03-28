@@ -11,7 +11,7 @@ import {resolvers} from "./schema/resolvers";
 import serverless from 'serverless-http';
 
 
-async function startServer() {
+// async function startServer() {
   const app = express();
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
@@ -21,7 +21,8 @@ async function startServer() {
   });
 
 
-  await server.start();
+  // @ts-ignore
+await server.start();
 
   app.use(
     '/graphql',
@@ -33,10 +34,7 @@ async function startServer() {
 
   const handler = serverless(app);
   // @ts-ignore
-  new Promise((resolve) => httpServer.listen({ port: 4001 }, resolve)).then(() => {
-    console.log(`🚀 Server ready at http://localhost:4001/graphql`)
-  })
-}
-
-startServer();
+  // new Promise((resolve) => httpServer.listen({ port: 4001 }, resolve)).then(() => {
+  //   console.log(`🚀 Server ready at http://localhost:4001/graphql`)
+  // })
 
