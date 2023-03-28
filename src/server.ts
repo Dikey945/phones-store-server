@@ -13,38 +13,38 @@ import {startStandaloneServer} from "@apollo/server/standalone";
 
 
 async function startServer() {
-  // const app = express();
-  // const httpServer = http.createServer(app);
+  const app = express();
+  const httpServer = http.createServer(app);
   const server = new ApolloServer({
     typeDefs,
     resolvers,
     introspection: true,
-    // plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
 
-  const port = Number.parseInt(process.env.PORT!) || 4000;
-
-  const { url } = await startStandaloneServer(server, { listen: { port } });
-
-  console.log(`🚀 Server listening at: ${url}`);
-
-  // await server.start();
-
-  // app.use(
-  //   '/graphql',
-  //   cors(),
-  //   json(),
-  //   expressMiddleware(server),
-  // );
-  // app.use(express.static('dist'))
+  // const port = Number.parseInt(process.env.PORT!) || 4000;
   //
-  // // @ts-ignore
+  // const { url } = await startStandaloneServer(server, { listen: { port } });
+  //
+  // console.log(`🚀 Server listening at: ${url}`);
+
+  await server.start();
+
+  app.use(
+    '/graphql',
+    cors(),
+    json(),
+    expressMiddleware(server),
+  );
+  app.use(express.static('dist'))
+
+  // @ts-ignore
   // new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 5050 }, resolve)).then(() => {
   //   console.log(`🚀 Server ready at http://localhost:5050/graphql`)
   // })
-  // app.listen(process.env.PORT || 5050, () => {
-  //   console.log(`🚀 Server ready at http://localhost:4001/graphql`)
-  // })
+  app.listen(process.env.PORT || 5050, () => {
+    console.log(`🚀 Server ready at http://localhost:4001/graphql`)
+  })
 }
 
 startServer();
