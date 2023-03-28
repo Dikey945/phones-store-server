@@ -8,10 +8,9 @@ import {expressMiddleware} from "@apollo/server/express4";
 import cors from 'cors';
 import {typeDefs} from "./schema/typeDef";
 import {resolvers} from "./schema/resolvers";
-import serverless from 'serverless-http';
 
 
-// async function startServer() {
+async function startServer() {
   const app = express();
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
@@ -20,9 +19,7 @@ import serverless from 'serverless-http';
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
 
-
-  // @ts-ignore
-await server.start();
+  await server.start();
 
   app.use(
     '/graphql',
@@ -32,9 +29,11 @@ await server.start();
   );
   app.use(express.static('dist'))
 
-  const handler = serverless(app);
   // @ts-ignore
-  // new Promise((resolve) => httpServer.listen({ port: 4001 }, resolve)).then(() => {
-  //   console.log(`🚀 Server ready at http://localhost:4001/graphql`)
-  // })
+  new Promise((resolve) => httpServer.listen({ port: 4001 }, resolve)).then(() => {
+    console.log(`🚀 Server ready at http://localhost:4001/graphql`)
+  })
+}
+
+startServer();
 
