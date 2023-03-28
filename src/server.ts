@@ -22,7 +22,7 @@ async function startServer() {
 
   await server.start();
 
-  app.post(
+  app.use(
     '/graphql',
     cors(),
     json(),
