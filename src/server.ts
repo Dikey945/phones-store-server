@@ -22,9 +22,6 @@ async function startServer() {
 
   await server.start();
 
-  app.use('/', cors(), json(), (req, res) => {
-    res.send('Hello world');
-  });
   app.use(
     '/graphql',
     cors(),
@@ -34,10 +31,10 @@ async function startServer() {
   app.use(express.static('dist'))
 
   // @ts-ignore
-  new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 4001 }, resolve)).then(() => {
-    console.log(`🚀 Server ready at http://localhost:4001/graphql`)
+  new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 5050 }, resolve)).then(() => {
+    console.log(`🚀 Server ready at http://localhost:5050/graphql`)
   })
-  // app.listen(process.env.PORT || 4001, () => {
+  // app.listen(process.env.PORT || 5050, () => {
   //   console.log(`🚀 Server ready at http://localhost:4001/graphql`)
   // })
 }
