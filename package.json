@@ -12,6 +12,9 @@
     "lint": "eslint --ext .tsx,.ts --fix ./src -c .eslintrc.json",
     "dev": "node netlify-dev.js"
   },
+  "engines": {
+    "node" : ">=16.0.0 <17.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
