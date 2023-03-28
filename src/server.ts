@@ -1,6 +1,6 @@
 import express from 'express';
 
-import https from 'https';
+import http from 'http';
 import {ApolloServer} from "@apollo/server";
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { json } from 'body-parser';
@@ -13,7 +13,7 @@ import * as process from "process";
 
 async function startServer() {
   const app = express();
-  const httpServer = https.createServer(app);
+  const httpServer = http.createServer(app);
   const server = new ApolloServer({
     typeDefs,
     resolvers,
