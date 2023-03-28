@@ -31,12 +31,12 @@ async function startServer() {
   app.use(express.static('dist'))
 
   // @ts-ignore
-  // new Promise((resolve) => httpServer.listen({ port: 4001 }, resolve)).then(() => {
-  //   console.log(`🚀 Server ready at http://localhost:4001/graphql`)
-  // })
-  app.listen(process.env.PORT || 4001, () => {
+  new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 4001 }, resolve)).then(() => {
     console.log(`🚀 Server ready at http://localhost:4001/graphql`)
   })
+  // app.listen(process.env.PORT || 4001, () => {
+  //   console.log(`🚀 Server ready at http://localhost:4001/graphql`)
+  // })
 }
 
 startServer();
