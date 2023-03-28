@@ -25,5 +25,6 @@ export const typeDefs = `
    type Query {
     getPhones(pagination: Pagination, sort:String, first:Int): [Phone]
     getAllPhones: [Phone]
+    getPhonesCount: Int
   }
   `

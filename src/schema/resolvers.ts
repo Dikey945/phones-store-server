@@ -32,6 +32,7 @@ export const resolvers = {
         phonesList = phonesList.slice(0, first);
       }
       return phonesList;
-    }
+    },
+    getPhonesCount: () => phones.length
   }
 }
