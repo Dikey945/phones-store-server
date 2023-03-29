@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs";
+import {Phone} from "../types/PhoneType";
 
 const phonesPath = path.resolve(__dirname, 'phones.json');
 const phones = JSON.parse(fs.readFileSync(phonesPath, 'utf8'));
@@ -15,13 +16,34 @@ interface args {
   first?: number;
 }
 
+const discount = (phone: Phone) => {
+  return phone.fullPrice - phone.price
+}
+
 export const resolvers = {
   Query: {
     getAllPhones: () => phones,
     getPhones: (_: any, {pagination, sort, first}: args) => {
+
       let phonesList = [...phones];
       if (sort) {
-
+        switch (sort) {
+          case 'newest':
+            phonesList = phonesList.sort((phoneA, phoneB): any => (
+              phoneA.year - phoneB.year
+            ))
+            break;
+          case 'cheapest':
+            phonesList = phonesList.sort((phoneA, phoneB): any => (
+              phoneA.price - phoneB.price
+            ))
+            break;
+          case 'discount':
+            phonesList = phonesList.sort((phoneA, phoneB): any => (
+              discount(phoneB) - discount(phoneA)
+            ))
+            break;
+        }
       }
       if (pagination) {
         const start = pagination.offset * pagination.limit;
