@@ -4,6 +4,8 @@ import {Phone} from "../types/PhoneType";
 
 const phonesPath = path.resolve(__dirname, 'phones.json');
 const phones = JSON.parse(fs.readFileSync(phonesPath, 'utf8'));
+const extendPhonesPath = path.resolve(__dirname, 'fullPhone.json');
+const extendPhones = JSON.parse(fs.readFileSync(extendPhonesPath, 'utf8'));
 interface Pagination {
   offset: number,
   limit: number
@@ -55,6 +57,9 @@ export const resolvers = {
       }
       return phonesList;
     },
-    getPhonesCount: () => phones.length
+    getPhonesCount: () => phones.length,
+    getExtendedPhone: (_: any, {id}: args) => {
+      return extendPhones.find((phone: Phone) => phone.id === id)
+    }
   }
 }

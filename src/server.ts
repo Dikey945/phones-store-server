@@ -42,8 +42,8 @@ async function startServer() {
   // new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 5050 }, resolve)).then(() => {
   //   console.log(`🚀 Server ready at http://localhost:5050/graphql`)
   // })
-  app.listen(process.env.PORT || 5001, () => {
-    console.log(`🚀 Server ready at http://localhost:5001/graphql`)
+  app.listen(process.env.PORT || 5050, () => {
+    console.log(`🚀 Server ready at http://localhost:5050/graphql`)
   })
 }
 
