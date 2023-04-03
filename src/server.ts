@@ -20,6 +20,12 @@ async function startServer() {
     resolvers,
     introspection: true,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    formatError: (error) => {
+      if(error.message.startsWith('User with current email already exists')) {
+        return new Error('User with current email already exists');
+      }
+      return error
+    }
   });
 
   // const port = Number.parseInt(process.env.PORT!) || 4000;
@@ -42,8 +48,8 @@ async function startServer() {
   // new Promise((resolve) => httpServer.listen({ port: process.env.PORT || 5050 }, resolve)).then(() => {
   //   console.log(`🚀 Server ready at http://localhost:5050/graphql`)
   // })
-  app.listen(process.env.PORT || 5050, () => {
-    console.log(`🚀 Server ready at http://localhost:5050/graphql`)
+  app.listen(process.env.PORT || 5001, () => {
+    console.log(`🚀 Server ready at http://localhost:5001/graphql`)
   })
 }
 

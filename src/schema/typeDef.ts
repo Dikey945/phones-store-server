@@ -47,11 +47,20 @@ export const typeDefs = `
     offset: Int
     limit: Int
   }
+  
+  type User {
+    id: ID!
+    email: String!
+    password: String!
+  }
     
    type Query {
     getPhones(pagination: Pagination, sort:String, first:Int): [Phone]
     getAllPhones: [Phone]
     getPhonesCount: Int
     getExtendedPhone(id: ID!): ExtendedPhone
+  }
+  type Mutation {
+     register(email: String, password: String): User!
   }
   `
